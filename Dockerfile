@@ -1,5 +1,8 @@
-FROM public.ecr.aws/bitnami/python:latest
+FROM public.ecr.aws/docker/library/python:3
 
+WORKDIR /usr/src/app
+
+COPY app.py . 
 # tell the port number the container should expose
 EXPOSE 5000
 
