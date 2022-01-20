@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Generate a random funny gif url
-    getURL = "https://api.giphy.com/v1/gifs/random?api_key=wkIMB9zIgDLEWPEvfDhf71opFk3HOXyQ&tag=&rating=g"
+    getURL = "https://api.giphy.com/v1/gifs/random?api_key=wkIMB9zIgDLEWPEvfDhf71opFk3HOXyQ&tag=funny"
     response = requests.get(getURL)
     data = response.json()
     try:
