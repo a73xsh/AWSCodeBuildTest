@@ -24,6 +24,6 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"nodeapp","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
-      - aws ecs update-service --region $AWS_DEFAULT_REGION --cluster DevTes --service giphy-service --force-new-deployment
+      - aws ecs update-service --region $AWS_DEFAULT_REGION --cluster DevTes --service giphy-service --force-new-deployment --debug
 artifacts:
   files: imagedefinitions.json
