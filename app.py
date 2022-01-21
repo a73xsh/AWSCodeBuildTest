@@ -11,7 +11,7 @@ def index():
     response = requests.get(getURL)
     data = response.json()
     try:
-        url = data["data"]["image_url"]
+        url = data["data"]["images"]["original"]["url"]
     except TypeError:
         url = "No matches found"
 
