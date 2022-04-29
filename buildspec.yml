@@ -1,29 +1,28 @@
 version: 0.2
 
+env:
+  variables:
+    BUILD_BRANCH: "`echo $CODEBUILD_WEBHOOK_HEAD_REF | cut -d \"/\" -f 3`"
+
 phases:
+  install:
+    runtime-versions:
+      nodejs: 14
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - aws --version
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
-      - REPOSITORY_URI=993723454059.dkr.ecr.us-east-1.amazonaws.com/giphy-funny
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+      - echo "Build branch ${BUILD_BRANCH}"
+      - apt-get update && \
+        apt-get install -yqq libgtk2.0-0 libgconf-2-4 xvfb ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatk1.0-0 \
+        libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 \
+        libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 \
+        lsb-release wget xdg-utils
+      - npm install && npm install -g allure-commandline
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - pwd
+      - ls -lah
+      - ./start_codeceptjs.sh
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Writing image definitions file...
-      - printf '[{"name":"nodeapp","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - cat imagedefinitions.json
-      - aws ecs update-service --region $AWS_DEFAULT_REGION --cluster DevTest --service giphy-service --force-new-deployment --debug
-artifacts:
-  files: imagedefinitions.json
