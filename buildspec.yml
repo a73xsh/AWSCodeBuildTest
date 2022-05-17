@@ -9,7 +9,7 @@ phases:
     commands:
       - export BUILD_BRANCH="`echo $CODEBUILD_WEBHOOK_HEAD_REF | cut -d \"/\" -f 3`"
       - echo "Build branch ${BUILD_BRANCH}"
-      - git checkout dev-test
+      - git checkout ${BUILD_BRANCH}
       - export GITHUB_BRANCH=$(git describe --all)
       - echo "Github branch ${GITHUB_BRANCH}"
       - apt-get update &&
