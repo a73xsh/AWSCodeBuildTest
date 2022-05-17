@@ -9,6 +9,9 @@ phases:
     commands:
       - export BUILD_BRANCH="`echo $CODEBUILD_WEBHOOK_HEAD_REF | cut -d \"/\" -f 3`"
       - echo "Build branch ${BUILD_BRANCH}"
+      - git checkout dev-test
+      - export GITHUB_BRANCH=$(git describe --all)
+      - echo "Github branch ${GITHUB_BRANCH}"
       - apt-get update &&
       - >-
         apt-get install -yqq libgtk2.0-0 libgconf-2-4 xvfb ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatk1.0-0 
