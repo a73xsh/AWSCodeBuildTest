@@ -2,6 +2,11 @@
 
 set -ev
 
+export IOS_ID=test
+export IOS_ID=$ID_IOS
+
+echo "TEST -------------------- ${IOS_ID}"
+
 codebuild_id=$CODEBUILD_BUILD_ID
 
 echo "URL project ${CODEBUILD_LOG_PATH}"
