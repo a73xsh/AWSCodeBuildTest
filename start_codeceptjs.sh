@@ -2,7 +2,7 @@
 
 set -ev
 
-export BUILD_BRANCH=stage
+BUILD_BRANCH=stage
 export current_env=$BUILD_BRANCH
 
 echo "TEST -------------------- ${current_env}"
