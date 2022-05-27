@@ -4,7 +4,7 @@ set -ev
 
 codebuild_id=$CODEBUILD_BUILD_ID
 
-echo "URL project ${CODEBUILD_PUBLIC_BUILD_URL}"
+echo "URL project ${CODEBUILD_LOG_PATH}"
 
 echo "codebuild ID ${codebuild_id}"
 
@@ -22,4 +22,4 @@ chown -R pptruser:pptruser /home/pptruser
 rm test.exe || echo "test finish"
 ls -lah
 
-aws codebuild batch-get-builds --ids ${codebuild_id}
+#aws codebuild batch-get-builds --ids ${codebuild_id}
