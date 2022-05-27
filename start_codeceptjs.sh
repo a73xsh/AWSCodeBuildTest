@@ -3,7 +3,7 @@
 set -ev
 
 
-export current_env=${BUILD_BRANCH:-"bs://b2a56c30b5eeadcc5a25e9aaab91f87407eb8b41"}
+export current_env=${iOS_CP:-"bs://b2a56c30b5eeadcc5a25e9aaab91f87407eb8b41"}
 
 echo "TEST -------------------- ${current_env}"
 
