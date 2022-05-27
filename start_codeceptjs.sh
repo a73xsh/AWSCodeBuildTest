@@ -2,6 +2,8 @@
 
 set -ev
 
+echo "URL project ${CODEBUILD_PUBLIC_BUILD_URL}"
+
 echo "test .... ${CODEBUILD_WEBHOOK_HEAD_REF}"
 echo "branch.... ${BUILD_BRANCH}"
 
