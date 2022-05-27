@@ -2,10 +2,10 @@
 
 set -ev
 
-export IOS_ID=test
-export IOS_ID=$ID_IOS
+export BUILD_BRANCH=stage
+export current_env=$BUILD_BRANCH
 
-echo "TEST -------------------- ${IOS_ID}"
+echo "TEST -------------------- ${current_env}"
 
 codebuild_id=$CODEBUILD_BUILD_ID
 
