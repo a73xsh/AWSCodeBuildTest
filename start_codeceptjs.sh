@@ -2,8 +2,8 @@
 
 set -ev
 
-BUILD_BRANCH=stage
-export current_env=$BUILD_BRANCH
+
+export current_env=${BUILD_BRANCH:-"bs://b2a56c30b5eeadcc5a25e9aaab91f87407eb8b41"}
 
 echo "TEST -------------------- ${current_env}"
 
